@@ -1,0 +1,47 @@
+<form>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="formgrid grid">
+            <div class="field col mb-5">
+                <h5 class="m-0">Cadastro Autorizações</h5>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-2">
+                <label for="id">ID</label>
+                <input type="text" pInputText id="id" name="id" [(ngModel)]="autorizacao.id" readonly/>
+            </div>
+            <div class="field col-10">
+                <label for="classificacao">Classificação</label>
+                <input type="text" pInputText id="classificacao" name="classificacao" [(ngModel)]="autorizacao.classificacao" required #autofocus/>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-12">
+                <label for="descricao">Autorização</label>
+                <input type="text" pInputText id="descricao" name="descricao" [(ngModel)]="autorizacao.descricao" required/>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-2">
+                <label for="situacao">Situação</label>
+                <p-dropdown id="situacao" name="situacao" [options]="status" [(ngModel)]="autorizacao.ativo" optionLabel="label" optionValue="value"></p-dropdown>
+            </div>
+        </div>
+
+        <div class="formgrid grid mt-5">
+            <div class="field col-2">
+                <button type="submit" pButton pRipple name="btn-salvar" label="Salvar" icon="pi pi-check" class="p-button-success" (click)="salvar()"></button>
+            </div>
+            <div class="field col-2">
+                <button pButton pRipple name="btn-novo" label="Novo" icon="pi pi-plus" class="p-button-primary" (click)="criar()"></button>
+            </div>
+            <div class="field col-2">
+                <button pButton pRipple name="btn-voltar" label="Voltar" icon="pi pi-arrow-left" class="p-button-secondary" (click)="voltar()"></button>
+            </div>
+        </div>
+
+    </div>
+</form>

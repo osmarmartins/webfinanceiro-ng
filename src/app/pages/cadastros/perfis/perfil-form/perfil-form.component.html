@@ -1,0 +1,118 @@
+<form>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="formgrid grid">
+            <div class="field col mb-5">
+                <h5 class="m-0">Cadastro de Perfis</h5>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-2">
+                <label for="id">ID</label>
+                <input type="text" pInputText id="id" name="id" [(ngModel)]="perfil.id" readonly/>
+            </div>
+            <div class="field col-10">
+                <label for="descricao">Descrição</label>
+                <input type="text" pInputText id="descricao" name="descricao" [(ngModel)]="perfil.descricao" required #autofocus/>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-2">
+                <label for="situacao">Situação</label>
+                <p-dropdown id="situacao" name="situacao" [options]="status" [(ngModel)]="perfil.ativo" optionLabel="label" optionValue="value"></p-dropdown>
+            </div>
+
+            <div class="field col-7">
+                <label for="autorizacoes">Autorizações</label>
+                <p-multiSelect name="autorizacoes" id="autorizacoes"
+                    [options]="autorizacoesDisponiveis"
+                    [(ngModel)]="autorizacoesSelecionadas"
+                    optionLabel="descricao">
+                </p-multiSelect>
+            </div>
+
+            <div class="field col-3">
+                <label>.</label>
+                <button pButton pRipple name="btn-autorizacoes" label="Autorizações" icon="pi pi-plus"
+                    (click)="adicionarAutorizacao()"
+                    class="p-button-primary">
+                </button>
+            </div>
+        </div>
+
+        <div class="formgrid grid mt-5">
+            <div class="field col-2">
+                <button type="submit" pButton pRipple name="btn-salvar" label="Salvar" icon="pi pi-check" class="p-button-success" (click)="salvar()"></button>
+            </div>
+            <div class="field col-2">
+                <button pButton pRipple name="btn-novo" label="Novo" icon="pi pi-plus" class="p-button-primary" (click)="criar()"></button>
+            </div>
+            <div class="field col-2">
+                <button pButton pRipple name="btn-voltar" label="Voltar" icon="pi pi-arrow-left" class="p-button-secondary" (click)="voltar()"></button>
+            </div>
+        </div>
+
+
+        <div class="grid">
+            <div class="col-12">
+                <div class="card">
+                    <h6>Relação de Autorizações do Perfil</h6>
+                    <p-table #dt [value]="perfil.autorizacoes" dataKey="id"
+                        [responsive]="true"
+                        [lazy]="false"
+                        [(selection)]="autorizacoesSelecionadasPerfil"
+                        [rowHover]="true"
+                        styleClass="p-datatable-customers"
+                        currentPageReportTemplate="Exibindo de {first} até {last} do total de {totalRecords}"
+                        [showCurrentPageReport]="true">
+
+                        <ng-template pTemplate="caption">
+                            <div class="flex p-flex-column md:flex-row md:justify-content-between table-header">
+                                <span>
+                                    <button pButton pRipple label="Excluir" icon="pi pi-trash" class="p-button-danger mb-2" (click)="aoExcluirSelecao()" *ngIf="autorizacoesSelecionadasPerfil.length"></button>
+                                </span>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="id" style="width: 15%;">ID <p-sortIcon field="id"></p-sortIcon></th>
+                            <th pSortableColumn="nome">Classificação <p-sortIcon field="nome"></p-sortIcon></th>
+                            <th pSortableColumn="fone1">Descrição<p-sortIcon field="fone1"></p-sortIcon></th>
+                            <th style="width: 15%;"></th>
+                        </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr>
+                                <td>
+                                    <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                                </td>
+                                <td>
+                                    {{item.id}}
+                                </td>
+                                <td>
+                                    {{item.classificacao}}
+                                </td>
+                                <td>
+                                    {{item.descricao}}
+                                </td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-trash"
+                                        class="p-button-rounded p-button-danger"
+                                        (click)="aoExcluir(item)">
+                                    </button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</form>

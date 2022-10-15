@@ -1,0 +1,66 @@
+<form>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="formgrid grid">
+            <div class="field col mb-5">
+                <h5 class="m-0">Trocar Senha</h5>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-2">
+                <label for="id">ID</label>
+                <input type="text" pInputText id="id" name="id" [(ngModel)]="usuario.id" readonly/>
+            </div>
+            <div class="field col-6">
+                <label for="descricao">Nome</label>
+                <input type="text" pInputText id="nome" name="nome" [(ngModel)]="usuario.nome" readonly/>
+            </div>
+            <div class="field col-4">
+                <label for="usuario">Login</label>
+                <input type="text" pInputText id="usuario" name="usuario" [(ngModel)]="usuario.login" readonly #autofocus/>
+            </div>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col-4">
+                <label for="senha">Senha Atual</label>
+                <p-password inputId="senha" name="senha" placeholder="Sua senha atual" required
+                    [toggleMask]="true"
+                    [feedback]="false"
+                    [(ngModel)]="usuario.senhaAtual">
+                </p-password>
+            </div>
+            <div class="field col-4">
+                <label for="novasenha">Nova Senha</label>
+                <p-password id="novasenha" name="novasenha" placeholder="Sua nova senha"
+                    [toggleMask]="true"
+                    [feedback]="true"
+                    promptLabel="Entre com a nova senha"
+                    weakLabel="Fraco"
+                    mediumLabel="Médio"
+                    strongLabel="Forte"
+                    [(ngModel)]="usuario.novaSenha">
+                </p-password>
+            </div>
+            <div class="field col-4">
+                <label for="confirmar-senha">Confirmação da Nova Senha</label>
+                <p-password id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua nova senha"
+                    [toggleMask]="true"
+                    [feedback]="true"
+                    promptLabel="Confirmação da nova senha"
+                    weakLabel="Fraco"
+                    mediumLabel="Médio"
+                    strongLabel="Forte"
+                    [(ngModel)]="usuario.confirmarSenha">
+                </p-password>
+            </div>
+        </div>
+
+        <div class="formgrid grid mt-5">
+            <div class="field col-2">
+                <button type="submit" pButton pRipple name="btn-salvar" label="Salvar" icon="pi pi-check" class="p-button-success" (click)="salvar()"></button>
+            </div>
+        </div>
+
+    </div>
+</form>
